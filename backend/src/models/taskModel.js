@@ -5,17 +5,17 @@ const getAll = async () => {
     return tasks;
 };
 
-const newTask = async ( task ) => {
+const newTask = async (task) => {
     
     const { title } = task;
 
-    const query = "INSERT INTO tasks( title, status, created_at ) VALUES ( ?, ?, ? )";
+    const query = "INSERT INTO tasks( title, status, created_at ) VALUES (?, ?, ?)";
 
-    const dateUTC = new Date( Date.now() ).toUTCString;
+    const dateUTC = new Date(Date.now()).toUTCString;
 
-    const [createdTask] = await connection.execute( query, [ title, "pendente", dateUTC ] );
+    const [createdTask] = await connection.execute(query, [title, "pendente", dateUTC]);
 
-    return createdTask;
+    return {insertId: createdTask.insertId};
 };
 
 module.exports = {
