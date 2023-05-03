@@ -22,6 +22,19 @@ const addTasks = async (event) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(task),
     })
+
+    loadTasks();
+
+    inputTask.value = '';
+};
+
+const deleteTask = async (id) => {
+
+    await fetch('http://localhost:3333/tasks/${id}', {
+        method: 'delete',
+    });
+
+    loadTasks();
 };
 
 const prettierDate = (dateUTC) => {
@@ -80,6 +93,8 @@ const createRow = (task) => {
 
     editButton.classList.add('btn-action');
     deleteButton.classList.add('btn-action');
+
+    deleteButton.addEventListener('click', () => deleteTask(id));
 
     tdActions.appendChild(editButton);
     tdActions.appendChild(deleteButton);
