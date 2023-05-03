@@ -24,11 +24,13 @@ const createElement = (tag, innerText = '', innerHTML = '') => {
     return element;
 };
 
-const createSelect = () => {
+const createSelect = (value) => {
     
     const options = '<option value="pendente">Pendente</option><option value="em andamento">Em Andamento</option><option value="concluida">Concluída</option>';
 
     const select = createElement('select', '', options);
+
+    select.value = value;
 
     return select;
 };
@@ -43,6 +45,8 @@ const createRow = (task) => {
     const tdStatus = createElement('td');
     const tdActions = createElement('td');
 
+    const select = createSelect(status);
+
     const editButton = createElement('button', '', '<span class="material-symbols-outlined">edit</span>');
     const deleteButton = createElement('button', '', '<span class="material-symbols-outlined">delete</span>');
 
@@ -52,11 +56,13 @@ const createRow = (task) => {
     tdActions.appendChild(editButton);
     tdActions.appendChild(deleteButton);
 
+    tdStatus.appendChild(select);
+
     tr.appendChild(tdTitle);
     tr.appendChild(tdCreatedAt);
     tr.appendChild(tdStatus);
     tr.appendChild(tdActions);
 
-    tbody.appendChild(tr);
+    return tr;
 
 };
