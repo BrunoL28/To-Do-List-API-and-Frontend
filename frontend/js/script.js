@@ -37,6 +37,18 @@ const deleteTask = async (id) => {
     loadTasks();
 };
 
+const updateTask = async ({id, title, status}) => {
+
+    await fetch('http://localhost:3333/tasks/${id}', {
+        method: 'put',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, status }),
+    });
+
+    loadTasks();
+
+};
+
 const prettierDate = (dateUTC) => {
 
     const options = {
@@ -87,6 +99,8 @@ const createRow = (task) => {
     const tdActions = createElement('td');
 
     const select = createSelect(status);
+
+    select.addEventListener('change', ({ target }) => updateTask({ ...task, status: target.value}));
 
     const editButton = createElement('button', '', '<span class="material-symbols-outlined">edit</span>');
     const deleteButton = createElement('button', '', '<span class="material-symbols-outlined">delete</span>');
