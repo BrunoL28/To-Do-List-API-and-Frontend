@@ -37,7 +37,7 @@ const deleteTask = async (id) => {
     loadTasks();
 };
 
-const updateTask = async ({id, title, status}) => {
+const updateTask = async ({ id, title, status }) => {
 
     await fetch('http://localhost:3333/tasks/${id}', {
         method: 'put',
@@ -153,3 +153,7 @@ const loadTasks = async () => {
         tbody.appendChild(tr);
     });
 }
+
+addForm.addEventListener('submit', addTasks);
+
+loadTasks();
