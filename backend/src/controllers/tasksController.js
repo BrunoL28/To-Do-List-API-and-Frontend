@@ -1,4 +1,4 @@
-const taskModel = require('../models/taskModel');
+const taskModel = require('../models/tasksModel');
 
 const getAll = async (_request, response) => {
 
